@@ -1,48 +1,30 @@
-import MovieList from "./Components/MovieList";
-import { Film } from './Film';
-import { useState } from "react";
-import AddMovie from "./Components/AddMovie";
-import Search from "./Components/Search";
-import Rating from "./Components/Rating";
+import {Routes, Route } from "react-router-dom";
+import {Films} from './Film'
+import React, { useState } from "react";
+import MovieDescription from "./pages/MovieDescription";
 import "./App.css";
+import AddMovie from "./components/AddMovie";
+import Home from "./components/Home";
 
-function App() {
-  const [movie, setMovie] = useState(Film);
-  const [search, setSearch] = useState("");
-  const [rating, setRating] = useState(1);
-  const deleteHAndler = (ID) => {
-    setMovie(movie.filter((e) => e.id !== ID));
-  };
-  const handleDone = (ID) => {
-    setMovie(
-      movie.map((el) => (el.id === ID ? { ...el, isDone: !el.isDone } : el))
-    );
-  };
-  const handleAdd = (newMovie) => {
-    setMovie([...movie, newMovie]);
-  };
+const App = () => {
+  const [films, setFilms] = useState([...Films]);
 
-  // Search
-  //const handleSearch=(e)=>{}
+  const addFilms = (film) => {
+   setFilms([...films,film])
+ };
 
-  return (
-    <div className="App">
-      <Search setSearch={setSearch} />
-      <p className="intro">Sharing a few of our favourite movies</p>
-      <MovieList
-        movie={movie}
-        deleteHAndler={deleteHAndler}
-        handleDone={handleDone}
-        handleAdd={handleAdd}
-        search={search}
-        rating={rating}
-      />
-      <hr />
-      <p>Add Movie </p>
-      <AddMovie handleAdd={handleAdd} />
-    </div>
-  );
-}
-
-export default App;
+    return (
+       <div className="App">
+         <Routes>
+         <Route path="/" element={<Home allMovies={films} />} />
+         <Route path="/movie-description/:id" element={<MovieDescription allMovies={films}  />} />
+         <Route path="/add-new-movie" element={<AddMovie handleAdd={addFilms} />} />
+ 
+        </Routes>
+         
+     </div>
+   );
+   }
+  
+export default App ;
 

@@ -1,9 +1,12 @@
 import React from "react";
-import Rating from "react-rating-stars-component";
+import {Link} from "react-router-dom"
+import Rating from "./Rating";
 const MovieCard = ({ movie, deleteHAndler, handleDone }) => {
   return (
     <div className="movie-card">
-      <p>{movie.name}</p>
+      <Link to={`/movie-description/${movie.id}`}>
+        <p>{movie.name}</p>
+      </Link>
       <Rating value={movie.rating} precision={0.5} />
       <img src={movie.image} alt="movie" />
       <p className="date">{movie.date}</p>

@@ -1,22 +1,19 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AddMovie = ({ handleAdd }) => {
   const [input, setInput] = useState("");
   const [image, setImage] = useState("");
   const [rating, setRating] = useState(1);
   const [date, setDate] = useState("");
-  const AddMovie = () => {
-    handleAdd({
-      isDone: false,
-      id: Math.random(),
-      name: input,
-      image: image,
-      rating: rating,
-      date: date
-    });
-  };
+ 
+
+
+
   return (
     <div className="add-movie-form">
+      <h2>Add Movie </h2>
+
       <input
         type="text"
         placeholder="movie's name"
@@ -39,7 +36,17 @@ const AddMovie = ({ handleAdd }) => {
       />
       
       
-      <button onClick={() => AddMovie()}>Add Movie</button>
+      <Link to={'/'}><button onClick={() =>     handleAdd({
+      isDone: false,
+      id: Math.random(),
+      name: input,
+      image: image,
+      rating: rating,
+      date: date,
+      MovieDescription : "",
+      trailerLink : " ",
+    
+    })}>Add Movie</button></Link>
     </div>
   );
 };
